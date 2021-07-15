@@ -11,14 +11,14 @@ parser.add_argument('-di', '--debug-inputs', action='store_true', help='Prints t
 
 args = parser.parse_args()
 
-if args.debug_yaml:
+if args.debug_inputs:
     config = parse_config()
     logging.debug(f"{args}")
     logging.debug(f"{config}")
     
 if args.binance_all_tickers:
     with get_data_binance.BinanceWrapper() as client:
-        print(client.get_all_tickers())
+        logging.info(client.get_all_tickers())
 
 
 
