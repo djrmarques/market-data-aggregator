@@ -9,7 +9,7 @@ def parse_config() -> dict:
     Returns:
         [type]: [description]
     """
-    conf_file_path = "config.yaml"
+    conf_file_path = "project.yaml"
     with open(conf_file_path, 'r') as stream:
         try:
             config = yaml.safe_load(stream)
@@ -20,6 +20,6 @@ def parse_config() -> dict:
 def load_binance_client() -> Client:
     """ Returns the binance client """
     config = parse_config()
-    api_key, api_secret = config['API_KEYS']['BINANCE']['ACCESSKEY'], config['API_KEYS']['BINANCE']['SECRETKEY']
+    api_key, api_secret = config['BINANCE']['ACCESSKEY'], config['BINANCE']['SECRETKEY']
     client = Client(api_key, api_secret)
     return client

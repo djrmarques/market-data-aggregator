@@ -4,6 +4,9 @@ import pandas as pd
 
 class BinanceWrapper():
     """ This class will act as a wrapper for the Binance API, that will download all the necessary information for the tool """
+
+    client = load_binance_client()
+
     def __init__(self):
         pass
 
@@ -26,3 +29,6 @@ class BinanceWrapper():
     def download_and_save_to_s3(self) -> None:
         """ Downloads everything and saves it to the designated S3 bucket"""
         raise NotImplementedError
+
+    def get_all_tickers(self):
+        return self.client.get_all_tickers()
