@@ -1,5 +1,5 @@
 # market-data-aggregator
-Tool to gather and store market data from various places into a private S3 bucket
+Tool to gather and store market data from various places into a private S3 bucket.
 
 # Settup
 
@@ -7,13 +7,12 @@ Tool to gather and store market data from various places into a private S3 bucke
 ```sh
 pip install -r requirements.txt
 ```
-2. Create a *project.yaml* file with the following credentials 
+2. Create a *.env* file with the following credentials 
 
-```yaml
-OUTPUT_S3: Bucket to save the results
+```sh
+# S3 bucket output
+OUTPUT_S3='s3-bucket'
 
-# Binance will be used to obtain market data
-BINANCE: 
-  SECRETKEY: Binance Secret
-  ACCESSKEY: Binance Access Key
+# Coinmarketcap API
+COINMARKETCAPKEY='cmk-api-key'
 ```
