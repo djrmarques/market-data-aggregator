@@ -1,8 +1,8 @@
-name: Horly CMK price extract
+name: Hourly CMK price extract
 on:
   schedule:
     # * is a special character in YAML so you have to quote this string
-    - cron:  '* * * * *'
+    - cron:  '*/10 * * * *'
 jobs:
   Hourly-CMK-Extract:
     runs-on: ubuntu-latest
