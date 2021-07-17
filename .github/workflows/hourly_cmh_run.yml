@@ -11,5 +11,9 @@ jobs:
       AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
       AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
     steps:
-      - run: pip install -r requirements.txt
-      - run: python main.py -l
+        - name: Install dependencies
+          run: |
+            python -m pip install --upgrade pip
+            if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+        - name: Update files to S3 
+          run: python main.py -l
