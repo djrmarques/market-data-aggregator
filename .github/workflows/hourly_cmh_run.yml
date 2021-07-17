@@ -1,0 +1,11 @@
+name: Horly CMK price extract
+on:
+  schedule:
+    # * is a special character in YAML so you have to quote this string
+    - cron:  '* * * * *'
+jobs:
+  Hourly-CMK-Extract:
+    runs-on: ubuntu-latest
+    steps:
+      - run: pip install -r requirements.txt
+      - run: python main.py -l
