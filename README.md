@@ -17,4 +17,4 @@ OUTPUT_S3='s3-bucket'
 COINMARKETCAPKEY='cmk-api-key'
 ```
 
-3. Setup AWP credentials
+3. Setup AWS credentials
