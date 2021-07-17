@@ -16,3 +16,5 @@ OUTPUT_S3='s3-bucket'
 # Coinmarketcap API
 COINMARKETCAPKEY='cmk-api-key'
 ```
+
+3. Setup AWP credentials
