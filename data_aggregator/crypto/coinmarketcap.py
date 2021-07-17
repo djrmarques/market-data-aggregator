@@ -3,8 +3,7 @@ import pandas as pd
 import requests
 import datetime 
 from typing import Union
-import random
-import tqdm 
+import os
 from datetime import datetime as dt
 
 logging.basicConfig(level=logging.INFO)
@@ -13,7 +12,6 @@ class CoinmarketcapWrapper:
     API_ADDRESS = r'https://pro-api.coinmarketcap.com'
     CMK_DAILY_HISTORY = r"https://web-api.coinmarketcap.com/v1/cryptocurrency/ohlcv/historical"
     LIMIT = 500
-    MARKETCAP_LIMIT = 100_000_000
 
     def __init__(self, api_key: str, s3_bucket: str):
         self.latest = pd.DataFrame() # Filled by get_latest method
@@ -38,17 +36,19 @@ class CoinmarketcapWrapper:
         """
         raise NotImplementedError
 
-
-
     def get_latest(self) -> pd.DataFrame:
         """ This is the only call with the official API """
         url = self.API_ADDRESS + r'/v1/cryptocurrency/listings/latest'
 
         # CMC_PRO_API_KEY
-        params = {'CMC_PRO_API_KEY': self.api_key, 'limit': self.LIMIT, 'market_cap_min': self.MARKETCAP_LIMIT}
+        params = {'CMC_PRO_API_KEY': self.api_key, 'limit': self.LIMIT}
         self.latest = pd.DataFrame(requests.get(url, params=params).json()['data'])
         logging.info(f"Downloaded {self.latest.shape[0]} tokens with more than {self.MARKETCAP_LIMIT} Market Cap")
 
         # Save output to S3
+        current_time = dt.now().strftime(r"%Y%m%d%H%M")
+        s3_save_path =  self.s3_bucket + "/hourly_cmk" + f"/cmk_latest_{current_time}.parquet"
+        self.info(f'Saving file to {s3_save_path}')
+        self.latest.to_parquet(s3_save_path)
         return self.latest 
 

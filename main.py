@@ -40,5 +40,5 @@ if args.debug_inputs:
     logging.debug(f"Config{config}")
     
 if args.latest_coinmarketcap:
-    cmk = coinmarketcap.CoinmarketcapWrapper()
-    latest_df = cmk.get_latest()
+    cmk = coinmarketcap.CoinmarketcapWrapper(os.environ['COINMARKETCAPKEY'], os.environ['OUTPUT_S3'])
+    cmk.get_latest()
