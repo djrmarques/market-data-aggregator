@@ -6,6 +6,10 @@ on:
 jobs:
   Hourly-CMK-Extract:
     runs-on: ubuntu-latest
+    env:
+      COINMARKETCAPKEY: ${{ secrets.COINMARKETCAPKEY }}
+      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
     steps:
       - run: pip install -r requirements.txt
       - run: python main.py -l
