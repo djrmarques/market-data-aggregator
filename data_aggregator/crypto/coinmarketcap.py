@@ -36,7 +36,7 @@ class CoinmarketcapWrapper:
         """
         raise NotImplementedError
 
-    def get_latest(self, local_save=False) -> pd.DataFrame:
+    def get_latest(self, debug=False) -> pd.DataFrame:
         """ This is the only call with the official API """
         url = r"https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest"
 
@@ -53,12 +53,10 @@ class CoinmarketcapWrapper:
 
         # Save output to S3
         current_time = dt.now().strftime(r"%Y%m%d%H%M")
-        if not local_save:
-            s3_save_path =  self.s3_bucket + "/hourly_cmk" + f"/cmk_latest_{current_time}.parquet"
-            logging.info(f'Saving file to {s3_save_path}')
+        s3_save_path =  self.s3_bucket + "/hourly_cmk" + f"/cmk_latest_{current_time}.parquet"
+        logging.info(f'Saving file to {s3_save_path}')
+        if not debug:
             self.latest.to_parquet(s3_save_path)
-        else:
-            self.latest.to_csv()
         return self.latest 
 
     @staticmethod

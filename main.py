@@ -24,16 +24,10 @@ if not os.path.exists(output_folder):
     os.makedirs(output_folder)
 
 parser = argparse.ArgumentParser(description='Process some integers.')
-parser.add_argument('-do', '--delete-output-folder', action='store_true', help='Deletes and recreates the output folder')
-parser.add_argument('-di', '--debug-inputs', action='store_true', help='Prints the inputs.')
+parser.add_argument('-d', '--debug-inputs', action='store_true', help='Prints the inputs.')
 parser.add_argument('-l', '--latest-coinmarketcap', action='store_true', help='Gets the latest info from Coinmarketcap.')
 parser.add_argument('-fh', '--full-history-coinmarketcap', action='store_true', help='Gets the full history from Coinmarketcap.')
 args = parser.parse_args()
-
-if args.delete_output_folder:
-    logging.warning(f"Deleting the output folder and everything in it")
-    shutil.register_archive_format(output_folder)
-    os.makedirs(output_folder)
 
 if args.debug_inputs:
     logging.debug(f"Input Arguments {args}")
@@ -41,4 +35,4 @@ if args.debug_inputs:
     
 if args.latest_coinmarketcap:
     cmk = coinmarketcap.CoinmarketcapWrapper(os.environ['COINMARKETCAPKEY'], os.environ['OUTPUT_S3'])
-    cmk.get_latest()
+    cmk.get_latest(debug=args.debug_inputs)
