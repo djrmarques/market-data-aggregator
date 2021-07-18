@@ -1,10 +1,7 @@
-name: CMK Latest Hourly
-on:
-  schedule:
-    # * is a special character in YAML so you have to quote this string
-    - cron:  '0 * * * *'
+name: Test Build
+on: [push]
 jobs:
-  Hourly-CMK-Extract:
+  build:
     runs-on: ubuntu-latest
     env:
       COINMARKETCAPKEY: ${{ secrets.COINMARKETCAPKEY }}
@@ -22,4 +19,4 @@ jobs:
             pip install -r requirements.txt
         - name: Download data
           run:
-            python main.py -l
+            python main.py -ld
