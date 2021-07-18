@@ -1,4 +1,4 @@
-name: Hourly CMK price extract
+name: CMK Latest Hourly
 on:
   schedule:
     # * is a special character in YAML so you have to quote this string
