@@ -31,7 +31,7 @@ args = parser.parse_args()
 
 if args.debug_inputs:
     logging.debug(f"Input Arguments {args}")
-    logging.debug(f"Config{config}")
+    logging.debug(f"Config {config}")
     
 if args.latest_coinmarketcap:
     cmk = coinmarketcap.CoinmarketcapWrapper(os.environ['COINMARKETCAPKEY'], os.environ['OUTPUT_S3'])

@@ -55,7 +55,9 @@ class CoinmarketcapWrapper:
         current_time = dt.now().strftime(r"%Y%m%d%H%M")
         s3_save_path =  self.s3_bucket + "/hourly_cmk" + f"/cmk_latest_{current_time}.parquet"
         logging.info(f'Saving file to {s3_save_path}')
-        if not debug:
+        if debug:
+            logging.info(f"Running in DEBUG mode")
+        else:
             self.latest.to_parquet(s3_save_path)
         return self.latest 
 
