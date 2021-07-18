@@ -1,3 +1,5 @@
+[![Test Build](https://github.com/djrmarques/market-data-aggregator/actions/workflows/test.yml/badge.svg?branch=main)](https://github.com/djrmarques/market-data-aggregator/actions/workflows/test.yml)
+
 # market-data-aggregator
 Tool to gather and store market data from various places into a private S3 bucket.
 
